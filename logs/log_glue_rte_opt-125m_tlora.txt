@@ -1,0 +1,261 @@
+Running experiment with data: glue_rte, model: facebook/opt-125m, LoRA type: tlora
+OPTForSequenceClassification(
+  (model): OPTModel(
+    (decoder): OPTDecoder(
+      (embed_tokens): Embedding(50272, 768, padding_idx=1)
+      (embed_positions): OPTLearnedPositionalEmbedding(2050, 768)
+      (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      (layers): ModuleList(
+        (0-11): 12 x OPTDecoderLayer(
+          (self_attn): OPTSdpaAttention(
+            (k_proj): Linear(in_features=768, out_features=768, bias=True)
+            (v_proj): Linear(in_features=768, out_features=768, bias=True)
+            (q_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+          )
+          (activation_fn): ReLU()
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+    )
+  )
+  (score): Linear(in_features=768, out_features=2, bias=False)
+)
+===========================================================================
+Layer (type:depth-idx)                             Param #
+===========================================================================
+OPTForSequenceClassification                       --
+├─OPTModel: 1-1                                    --
+│    └─OPTDecoder: 2-1                             --
+│    │    └─Embedding: 3-1                         38,608,896
+│    │    └─OPTLearnedPositionalEmbedding: 3-2     1,574,400
+│    │    └─LayerNorm: 3-3                         1,536
+│    │    └─ModuleList: 3-4                        85,054,464
+├─Linear: 1-2                                      1,536
+===========================================================================
+Total params: 125,240,832
+Trainable params: 125,240,832
+Non-trainable params: 0
+===========================================================================
+===========================================================================
+Layer (type:depth-idx)                             Param #
+===========================================================================
+OPTForSequenceClassification                       --
+├─OPTModel: 1-1                                    --
+│    └─OPTDecoder: 2-1                             --
+│    │    └─Embedding: 3-1                         38,608,896
+│    │    └─OPTLearnedPositionalEmbedding: 3-2     1,574,400
+│    │    └─LayerNorm: 3-3                         1,536
+│    │    └─ModuleList: 3-4                        85,054,464
+├─Linear: 1-2                                      1,536
+===========================================================================
+Total params: 125,240,832
+Trainable params: 125,240,832
+Non-trainable params: 0
+===========================================================================
+OPTForSequenceClassification(
+  (model): OPTModel(
+    (decoder): OPTDecoder(
+      (embed_tokens): Embedding(50272, 768, padding_idx=1)
+      (embed_positions): OPTLearnedPositionalEmbedding(2050, 768)
+      (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      (layers): ModuleList(
+        (0-11): 12 x OPTDecoderLayer(
+          (self_attn): OPTSdpaAttention(
+            (k_proj): Linear(in_features=768, out_features=768, bias=True)
+            (v_proj): TLoRALayer(
+              (linear): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (q_proj): TLoRALayer(
+              (linear): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+          )
+          (activation_fn): ReLU()
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+    )
+  )
+  (score): Linear(in_features=768, out_features=2, bias=False)
+)
+===========================================================================
+Layer (type:depth-idx)                             Param #
+===========================================================================
+OPTForSequenceClassification                       --
+├─OPTModel: 1-1                                    --
+│    └─OPTDecoder: 2-1                             --
+│    │    └─Embedding: 3-1                         (38,608,896)
+│    │    └─OPTLearnedPositionalEmbedding: 3-2     (1,574,400)
+│    │    └─LayerNorm: 3-3                         (1,536)
+│    │    └─ModuleList: 3-4                        85,313,688
+├─Linear: 1-2                                      (1,536)
+===========================================================================
+Total params: 125,500,056
+Trainable params: 259,224
+Non-trainable params: 125,240,832
+===========================================================================
+===========================================================================
+Layer (type:depth-idx)                             Param #
+===========================================================================
+OPTForSequenceClassification                       --
+├─OPTModel: 1-1                                    --
+│    └─OPTDecoder: 2-1                             --
+│    │    └─Embedding: 3-1                         (38,608,896)
+│    │    └─OPTLearnedPositionalEmbedding: 3-2     (1,574,400)
+│    │    └─LayerNorm: 3-3                         (1,536)
+│    │    └─ModuleList: 3-4                        85,313,688
+├─Linear: 1-2                                      (1,536)
+===========================================================================
+Total params: 125,500,056
+Trainable params: 259,224
+Non-trainable params: 125,240,832
+===========================================================================
+Epoch 1/20
+Batch 15/78 - Loss: 0.6846 - Accuracy: 0.5312
+Batch 30/78 - Loss: 0.6712 - Accuracy: 0.6250
+Batch 45/78 - Loss: 0.6149 - Accuracy: 0.7500
+Batch 60/78 - Loss: 0.8044 - Accuracy: 0.3438
+Batch 75/78 - Loss: 0.7590 - Accuracy: 0.4688
+Epoch 1 - Train Loss: 0.7047 - Train Acc: 0.5311 - Val Loss: 0.6760 - Val Acc: 0.5514 - Time: 61.83s
+Epoch 2/20
+Batch 15/78 - Loss: 0.6283 - Accuracy: 0.6875
+Batch 30/78 - Loss: 0.6667 - Accuracy: 0.5938
+Batch 45/78 - Loss: 0.6303 - Accuracy: 0.6875
+Batch 60/78 - Loss: 0.6806 - Accuracy: 0.5625
+Batch 75/78 - Loss: 0.6361 - Accuracy: 0.6562
+Epoch 2 - Train Loss: 0.6421 - Train Acc: 0.6357 - Val Loss: 0.6560 - Val Acc: 0.6245 - Time: 49.77s
+Epoch 3/20
+Batch 15/78 - Loss: 0.5530 - Accuracy: 0.7188
+Batch 30/78 - Loss: 0.6213 - Accuracy: 0.6562
+Batch 45/78 - Loss: 0.6856 - Accuracy: 0.5938
+Batch 60/78 - Loss: 0.7109 - Accuracy: 0.5312
+Batch 75/78 - Loss: 0.6155 - Accuracy: 0.6250
+Epoch 3 - Train Loss: 0.6152 - Train Acc: 0.6590 - Val Loss: 0.6330 - Val Acc: 0.6245 - Time: 48.15s
+Epoch 4/20
+Batch 15/78 - Loss: 0.5334 - Accuracy: 0.7812
+Batch 30/78 - Loss: 0.6437 - Accuracy: 0.6875
+Batch 45/78 - Loss: 0.6454 - Accuracy: 0.6562
+Batch 60/78 - Loss: 0.5877 - Accuracy: 0.6875
+Batch 75/78 - Loss: 0.5467 - Accuracy: 0.8125
+Epoch 4 - Train Loss: 0.5783 - Train Acc: 0.6942 - Val Loss: 0.6493 - Val Acc: 0.6698 - Time: 41.47s
+Epoch 5/20
+Batch 15/78 - Loss: 0.5830 - Accuracy: 0.5938
+Batch 30/78 - Loss: 0.7528 - Accuracy: 0.5312
+Batch 45/78 - Loss: 0.5765 - Accuracy: 0.6875
+Batch 60/78 - Loss: 0.5088 - Accuracy: 0.7188
+Batch 75/78 - Loss: 0.5867 - Accuracy: 0.6875
+Epoch 5 - Train Loss: 0.5540 - Train Acc: 0.6995 - Val Loss: 0.6655 - Val Acc: 0.6349 - Time: 42.76s
+Epoch 6/20
+Batch 15/78 - Loss: 0.5725 - Accuracy: 0.7500
+Batch 30/78 - Loss: 0.4260 - Accuracy: 0.8125
+Batch 45/78 - Loss: 0.5603 - Accuracy: 0.7188
+Batch 60/78 - Loss: 0.6464 - Accuracy: 0.5312
+Batch 75/78 - Loss: 0.5448 - Accuracy: 0.6562
+Epoch 6 - Train Loss: 0.5393 - Train Acc: 0.7187 - Val Loss: 0.6436 - Val Acc: 0.6594 - Time: 46.15s
+Epoch 7/20
+Batch 15/78 - Loss: 0.4999 - Accuracy: 0.7500
+Batch 30/78 - Loss: 0.4843 - Accuracy: 0.7812
+Batch 45/78 - Loss: 0.4169 - Accuracy: 0.8438
+Batch 60/78 - Loss: 0.5913 - Accuracy: 0.7188
+Batch 75/78 - Loss: 0.4197 - Accuracy: 0.7812
+Epoch 7 - Train Loss: 0.5037 - Train Acc: 0.7465 - Val Loss: 0.6487 - Val Acc: 0.6541 - Time: 43.54s
+Epoch 8/20
+Batch 15/78 - Loss: 0.4580 - Accuracy: 0.7188
+Batch 30/78 - Loss: 0.4938 - Accuracy: 0.7812
+Batch 45/78 - Loss: 0.5354 - Accuracy: 0.7188
+Batch 60/78 - Loss: 0.4070 - Accuracy: 0.7812
+Batch 75/78 - Loss: 0.4832 - Accuracy: 0.7500
+Epoch 8 - Train Loss: 0.4970 - Train Acc: 0.7518 - Val Loss: 0.6517 - Val Acc: 0.6592 - Time: 40.36s
+Epoch 9/20
+Batch 15/78 - Loss: 0.4036 - Accuracy: 0.8750
+Batch 30/78 - Loss: 0.4910 - Accuracy: 0.7188
+Batch 45/78 - Loss: 0.5875 - Accuracy: 0.6562
+Batch 60/78 - Loss: 0.4167 - Accuracy: 0.7188
+Batch 75/78 - Loss: 0.5970 - Accuracy: 0.6562
+Epoch 9 - Train Loss: 0.4601 - Train Acc: 0.7732 - Val Loss: 0.6555 - Val Acc: 0.6751 - Time: 42.15s
+Epoch 10/20
+Batch 15/78 - Loss: 0.3495 - Accuracy: 0.8750
+Batch 30/78 - Loss: 0.5593 - Accuracy: 0.7812
+Batch 45/78 - Loss: 0.3539 - Accuracy: 0.8750
+Batch 60/78 - Loss: 0.5113 - Accuracy: 0.7500
+Batch 75/78 - Loss: 0.3207 - Accuracy: 0.8750
+Epoch 10 - Train Loss: 0.4466 - Train Acc: 0.7882 - Val Loss: 0.6765 - Val Acc: 0.6645 - Time: 40.08s
+Epoch 11/20
+Batch 15/78 - Loss: 0.3808 - Accuracy: 0.8438
+Batch 30/78 - Loss: 0.4106 - Accuracy: 0.8438
+Batch 45/78 - Loss: 0.4957 - Accuracy: 0.8125
+Batch 60/78 - Loss: 0.4080 - Accuracy: 0.7188
+Batch 75/78 - Loss: 0.4976 - Accuracy: 0.7500
+Epoch 11 - Train Loss: 0.4204 - Train Acc: 0.8069 - Val Loss: 0.6645 - Val Acc: 0.6505 - Time: 40.40s
+Epoch 12/20
+Batch 15/78 - Loss: 0.4019 - Accuracy: 0.9062
+Batch 30/78 - Loss: 0.4938 - Accuracy: 0.7812
+Batch 45/78 - Loss: 0.4144 - Accuracy: 0.8438
+Batch 60/78 - Loss: 0.4117 - Accuracy: 0.7812
+Batch 75/78 - Loss: 0.4551 - Accuracy: 0.8125
+Epoch 12 - Train Loss: 0.4084 - Train Acc: 0.8132 - Val Loss: 0.7169 - Val Acc: 0.6802 - Time: 40.94s
+Epoch 13/20
+Batch 15/78 - Loss: 0.4844 - Accuracy: 0.7188
+Batch 30/78 - Loss: 0.4905 - Accuracy: 0.7812
+Batch 45/78 - Loss: 0.2037 - Accuracy: 0.9062
+Batch 60/78 - Loss: 0.4817 - Accuracy: 0.7500
+Batch 75/78 - Loss: 0.3583 - Accuracy: 0.8125
+Epoch 13 - Train Loss: 0.3833 - Train Acc: 0.8213 - Val Loss: 0.7073 - Val Acc: 0.6662 - Time: 39.90s
+Epoch 14/20
+Batch 15/78 - Loss: 0.2465 - Accuracy: 0.9062
+Batch 30/78 - Loss: 0.3588 - Accuracy: 0.8750
+Batch 45/78 - Loss: 0.1707 - Accuracy: 0.9688
+Batch 60/78 - Loss: 0.4483 - Accuracy: 0.7812
+Batch 75/78 - Loss: 0.2899 - Accuracy: 0.9062
+Epoch 14 - Train Loss: 0.3569 - Train Acc: 0.8425 - Val Loss: 0.7004 - Val Acc: 0.6382 - Time: 39.82s
+Epoch 15/20
+Batch 15/78 - Loss: 0.2671 - Accuracy: 0.8750
+Batch 30/78 - Loss: 0.4239 - Accuracy: 0.8750
+Batch 45/78 - Loss: 0.2460 - Accuracy: 0.8750
+Batch 60/78 - Loss: 0.2004 - Accuracy: 0.9062
+Batch 75/78 - Loss: 0.3031 - Accuracy: 0.9062
+Epoch 15 - Train Loss: 0.3430 - Train Acc: 0.8546 - Val Loss: 0.7125 - Val Acc: 0.6680 - Time: 41.21s
+Epoch 16/20
+Batch 15/78 - Loss: 0.2670 - Accuracy: 0.9688
+Batch 30/78 - Loss: 0.2365 - Accuracy: 0.8750
+Batch 45/78 - Loss: 0.3050 - Accuracy: 0.8750
+Batch 60/78 - Loss: 0.1657 - Accuracy: 0.9688
+Batch 75/78 - Loss: 0.2873 - Accuracy: 0.9375
+Epoch 16 - Train Loss: 0.3249 - Train Acc: 0.8656 - Val Loss: 0.7565 - Val Acc: 0.6591 - Time: 42.12s
+Epoch 17/20
+Batch 15/78 - Loss: 0.2566 - Accuracy: 0.9375
+Batch 30/78 - Loss: 0.1724 - Accuracy: 0.9375
+Batch 45/78 - Loss: 0.4410 - Accuracy: 0.8125
+Batch 60/78 - Loss: 0.4504 - Accuracy: 0.7500
+Batch 75/78 - Loss: 0.1821 - Accuracy: 0.9688
+Epoch 17 - Train Loss: 0.3293 - Train Acc: 0.8622 - Val Loss: 0.7094 - Val Acc: 0.6660 - Time: 39.10s
+Epoch 18/20
+Batch 15/78 - Loss: 0.3665 - Accuracy: 0.8125
+Batch 30/78 - Loss: 0.2121 - Accuracy: 0.9375
+Batch 45/78 - Loss: 0.3533 - Accuracy: 0.9062
+Batch 60/78 - Loss: 0.3598 - Accuracy: 0.8125
+Batch 75/78 - Loss: 0.2511 - Accuracy: 0.8438
+Epoch 18 - Train Loss: 0.2921 - Train Acc: 0.8758 - Val Loss: 0.7912 - Val Acc: 0.6854 - Time: 41.25s
+Epoch 19/20
+Batch 15/78 - Loss: 0.1920 - Accuracy: 0.9062
+Batch 30/78 - Loss: 0.1905 - Accuracy: 0.9062
+Batch 45/78 - Loss: 0.1995 - Accuracy: 0.9375
+Batch 60/78 - Loss: 0.2153 - Accuracy: 0.9062
+Batch 75/78 - Loss: 0.2631 - Accuracy: 0.9062
+Epoch 19 - Train Loss: 0.2691 - Train Acc: 0.8907 - Val Loss: 0.7702 - Val Acc: 0.6574 - Time: 40.77s
+Epoch 20/20
+Batch 15/78 - Loss: 0.2977 - Accuracy: 0.8438
+Batch 30/78 - Loss: 0.2795 - Accuracy: 0.8750
+Batch 45/78 - Loss: 0.1632 - Accuracy: 0.9688
+Batch 60/78 - Loss: 0.1744 - Accuracy: 0.9062
+Batch 75/78 - Loss: 0.5593 - Accuracy: 0.7812
+Epoch 20 - Train Loss: 0.2841 - Train Acc: 0.8822 - Val Loss: 0.8308 - Val Acc: 0.6731 - Time: 39.64s
+Average Time per Epoch: 43.07s
+Validation Loss: 0.8308, Validation Accuracy: 0.6731

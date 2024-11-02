@@ -1,0 +1,323 @@
+Running experiment with data: glue_sst2, model: FacebookAI/roberta-base, LoRA type: tlora
+RobertaForSequenceClassification(
+  (roberta): RobertaModel(
+    (embeddings): RobertaEmbeddings(
+      (word_embeddings): Embedding(50265, 768, padding_idx=1)
+      (position_embeddings): Embedding(514, 768, padding_idx=1)
+      (token_type_embeddings): Embedding(1, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): RobertaEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x RobertaLayer(
+          (attention): RobertaAttention(
+            (self): RobertaSdpaSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): RobertaSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): RobertaIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): RobertaOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+  )
+  (classifier): RobertaClassificationHead(
+    (dense): Linear(in_features=768, out_features=768, bias=True)
+    (dropout): Dropout(p=0.1, inplace=False)
+    (out_proj): Linear(in_features=768, out_features=2, bias=True)
+  )
+)
+==========================================================================================
+Layer (type:depth-idx)                                            Param #
+==========================================================================================
+RobertaForSequenceClassification                                  --
+├─RobertaModel: 1-1                                               --
+│    └─RobertaEmbeddings: 2-1                                     --
+│    │    └─Embedding: 3-1                                        38,603,520
+│    │    └─Embedding: 3-2                                        394,752
+│    │    └─Embedding: 3-3                                        768
+│    │    └─LayerNorm: 3-4                                        1,536
+│    │    └─Dropout: 3-5                                          --
+│    └─RobertaEncoder: 2-2                                        --
+│    │    └─ModuleList: 3-6                                       85,054,464
+├─RobertaClassificationHead: 1-2                                  --
+│    └─Linear: 2-3                                                590,592
+│    └─Dropout: 2-4                                               --
+│    └─Linear: 2-5                                                1,538
+==========================================================================================
+Total params: 124,647,170
+Trainable params: 124,647,170
+Non-trainable params: 0
+==========================================================================================
+==========================================================================================
+Layer (type:depth-idx)                                            Param #
+==========================================================================================
+RobertaForSequenceClassification                                  --
+├─RobertaModel: 1-1                                               --
+│    └─RobertaEmbeddings: 2-1                                     --
+│    │    └─Embedding: 3-1                                        38,603,520
+│    │    └─Embedding: 3-2                                        394,752
+│    │    └─Embedding: 3-3                                        768
+│    │    └─LayerNorm: 3-4                                        1,536
+│    │    └─Dropout: 3-5                                          --
+│    └─RobertaEncoder: 2-2                                        --
+│    │    └─ModuleList: 3-6                                       85,054,464
+├─RobertaClassificationHead: 1-2                                  --
+│    └─Linear: 2-3                                                590,592
+│    └─Dropout: 2-4                                               --
+│    └─Linear: 2-5                                                1,538
+==========================================================================================
+Total params: 124,647,170
+Trainable params: 124,647,170
+Non-trainable params: 0
+==========================================================================================
+RobertaForSequenceClassification(
+  (roberta): RobertaModel(
+    (embeddings): RobertaEmbeddings(
+      (word_embeddings): Embedding(50265, 768, padding_idx=1)
+      (position_embeddings): Embedding(514, 768, padding_idx=1)
+      (token_type_embeddings): Embedding(1, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): RobertaEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x RobertaLayer(
+          (attention): RobertaAttention(
+            (self): RobertaSdpaSelfAttention(
+              (query): TLoRALayer(
+                (linear): Linear(in_features=768, out_features=768, bias=True)
+              )
+              (key): TLoRALayer(
+                (linear): Linear(in_features=768, out_features=768, bias=True)
+              )
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): RobertaSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): RobertaIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): RobertaOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+  )
+  (classifier): RobertaClassificationHead(
+    (dense): Linear(in_features=768, out_features=768, bias=True)
+    (dropout): Dropout(p=0.1, inplace=False)
+    (out_proj): Linear(in_features=768, out_features=2, bias=True)
+  )
+)
+==========================================================================================
+Layer (type:depth-idx)                                            Param #
+==========================================================================================
+RobertaForSequenceClassification                                  --
+├─RobertaModel: 1-1                                               --
+│    └─RobertaEmbeddings: 2-1                                     --
+│    │    └─Embedding: 3-1                                        (38,603,520)
+│    │    └─Embedding: 3-2                                        (394,752)
+│    │    └─Embedding: 3-3                                        (768)
+│    │    └─LayerNorm: 3-4                                        (1,536)
+│    │    └─Dropout: 3-5                                          --
+│    └─RobertaEncoder: 2-2                                        --
+│    │    └─ModuleList: 3-6                                       85,313,688
+├─RobertaClassificationHead: 1-2                                  --
+│    └─Linear: 2-3                                                (590,592)
+│    └─Dropout: 2-4                                               --
+│    └─Linear: 2-5                                                (1,538)
+==========================================================================================
+Total params: 124,906,394
+Trainable params: 259,224
+Non-trainable params: 124,647,170
+==========================================================================================
+==========================================================================================
+Layer (type:depth-idx)                                            Param #
+==========================================================================================
+RobertaForSequenceClassification                                  --
+├─RobertaModel: 1-1                                               --
+│    └─RobertaEmbeddings: 2-1                                     --
+│    │    └─Embedding: 3-1                                        (38,603,520)
+│    │    └─Embedding: 3-2                                        (394,752)
+│    │    └─Embedding: 3-3                                        (768)
+│    │    └─LayerNorm: 3-4                                        (1,536)
+│    │    └─Dropout: 3-5                                          --
+│    └─RobertaEncoder: 2-2                                        --
+│    │    └─ModuleList: 3-6                                       85,313,688
+├─RobertaClassificationHead: 1-2                                  --
+│    └─Linear: 2-3                                                (590,592)
+│    └─Dropout: 2-4                                               --
+│    └─Linear: 2-5                                                (1,538)
+==========================================================================================
+Total params: 124,906,394
+Trainable params: 259,224
+Non-trainable params: 124,647,170
+==========================================================================================
+Epoch 1/20
+Batch 421/2105 - Loss: 0.6551 - Accuracy: 0.7812
+Batch 842/2105 - Loss: 0.5736 - Accuracy: 0.7812
+Batch 1263/2105 - Loss: 0.5822 - Accuracy: 0.7500
+Batch 1684/2105 - Loss: 0.5260 - Accuracy: 0.8438
+Batch 2105/2105 - Loss: 0.5608 - Accuracy: 0.8095
+Epoch 1 - Train Loss: 0.6073 - Train Acc: 0.7051 - Val Loss: 0.4563 - Val Acc: 0.8817 - Time: 355.68s
+Epoch 2/20
+Batch 421/2105 - Loss: 0.4679 - Accuracy: 0.9062
+Batch 842/2105 - Loss: 0.5599 - Accuracy: 0.7500
+Batch 1263/2105 - Loss: 0.4828 - Accuracy: 0.8438
+Batch 1684/2105 - Loss: 0.5010 - Accuracy: 0.8438
+Batch 2105/2105 - Loss: 0.4169 - Accuracy: 0.9048
+Epoch 2 - Train Loss: 0.5003 - Train Acc: 0.8466 - Val Loss: 0.3899 - Val Acc: 0.8929 - Time: 355.09s
+Epoch 3/20
+Batch 421/2105 - Loss: 0.5444 - Accuracy: 0.8750
+Batch 842/2105 - Loss: 0.5157 - Accuracy: 0.8438
+Batch 1263/2105 - Loss: 0.5840 - Accuracy: 0.7188
+Batch 1684/2105 - Loss: 0.4757 - Accuracy: 0.8750
+Batch 2105/2105 - Loss: 0.4552 - Accuracy: 0.8095
+Epoch 3 - Train Loss: 0.4697 - Train Acc: 0.8585 - Val Loss: 0.3488 - Val Acc: 0.8984 - Time: 354.23s
+Epoch 4/20
+Batch 421/2105 - Loss: 0.4841 - Accuracy: 0.8125
+Batch 842/2105 - Loss: 0.3894 - Accuracy: 0.8750
+Batch 1263/2105 - Loss: 0.4376 - Accuracy: 0.9062
+Batch 1684/2105 - Loss: 0.4340 - Accuracy: 0.8438
+Batch 2105/2105 - Loss: 0.4557 - Accuracy: 0.9048
+Epoch 4 - Train Loss: 0.4497 - Train Acc: 0.8650 - Val Loss: 0.3373 - Val Acc: 0.9018 - Time: 354.22s
+Epoch 5/20
+Batch 421/2105 - Loss: 0.4247 - Accuracy: 0.9062
+Batch 842/2105 - Loss: 0.4691 - Accuracy: 0.7812
+Batch 1263/2105 - Loss: 0.3878 - Accuracy: 0.9062
+Batch 1684/2105 - Loss: 0.4438 - Accuracy: 0.8438
+Batch 2105/2105 - Loss: 0.3340 - Accuracy: 0.9524
+Epoch 5 - Train Loss: 0.4347 - Train Acc: 0.8699 - Val Loss: 0.3264 - Val Acc: 0.8984 - Time: 353.39s
+Epoch 6/20
+Batch 421/2105 - Loss: 0.3277 - Accuracy: 1.0000
+Batch 842/2105 - Loss: 0.4367 - Accuracy: 0.8750
+Batch 1263/2105 - Loss: 0.3759 - Accuracy: 0.9062
+Batch 1684/2105 - Loss: 0.3889 - Accuracy: 0.9062
+Batch 2105/2105 - Loss: 0.3238 - Accuracy: 0.9524
+Epoch 6 - Train Loss: 0.4234 - Train Acc: 0.8734 - Val Loss: 0.3162 - Val Acc: 0.9018 - Time: 352.91s
+Epoch 7/20
+Batch 421/2105 - Loss: 0.4572 - Accuracy: 0.8750
+Batch 842/2105 - Loss: 0.3785 - Accuracy: 0.9375
+Batch 1263/2105 - Loss: 0.4739 - Accuracy: 0.8750
+Batch 1684/2105 - Loss: 0.4221 - Accuracy: 0.8750
+Batch 2105/2105 - Loss: 0.4554 - Accuracy: 0.9048
+Epoch 7 - Train Loss: 0.4120 - Train Acc: 0.8773 - Val Loss: 0.3137 - Val Acc: 0.9018 - Time: 352.60s
+Epoch 8/20
+Batch 421/2105 - Loss: 0.3978 - Accuracy: 0.8750
+Batch 842/2105 - Loss: 0.3516 - Accuracy: 0.9062
+Batch 1263/2105 - Loss: 0.4659 - Accuracy: 0.8750
+Batch 1684/2105 - Loss: 0.3612 - Accuracy: 0.9062
+Batch 2105/2105 - Loss: 0.4226 - Accuracy: 0.8095
+Epoch 8 - Train Loss: 0.4039 - Train Acc: 0.8801 - Val Loss: 0.3075 - Val Acc: 0.9051 - Time: 352.54s
+Epoch 9/20
+Batch 421/2105 - Loss: 0.3904 - Accuracy: 0.9062
+Batch 842/2105 - Loss: 0.4661 - Accuracy: 0.8438
+Batch 1263/2105 - Loss: 0.3899 - Accuracy: 0.8750
+Batch 1684/2105 - Loss: 0.3732 - Accuracy: 0.9062
+Batch 2105/2105 - Loss: 0.5118 - Accuracy: 0.7143
+Epoch 9 - Train Loss: 0.3972 - Train Acc: 0.8811 - Val Loss: 0.3005 - Val Acc: 0.9051 - Time: 353.30s
+Epoch 10/20
+Batch 421/2105 - Loss: 0.5616 - Accuracy: 0.7500
+Batch 842/2105 - Loss: 0.4675 - Accuracy: 0.8438
+Batch 1263/2105 - Loss: 0.2935 - Accuracy: 0.9688
+Batch 1684/2105 - Loss: 0.3122 - Accuracy: 0.9688
+Batch 2105/2105 - Loss: 0.3727 - Accuracy: 0.8571
+Epoch 10 - Train Loss: 0.3895 - Train Acc: 0.8842 - Val Loss: 0.2942 - Val Acc: 0.9074 - Time: 353.10s
+Epoch 11/20
+Batch 421/2105 - Loss: 0.4686 - Accuracy: 0.8438
+Batch 842/2105 - Loss: 0.5017 - Accuracy: 0.7812
+Batch 1263/2105 - Loss: 0.4850 - Accuracy: 0.8125
+Batch 1684/2105 - Loss: 0.3840 - Accuracy: 0.8750
+Batch 2105/2105 - Loss: 0.3541 - Accuracy: 0.9048
+Epoch 11 - Train Loss: 0.3847 - Train Acc: 0.8862 - Val Loss: 0.3095 - Val Acc: 0.9007 - Time: 353.58s
+Epoch 12/20
+Batch 421/2105 - Loss: 0.4271 - Accuracy: 0.8438
+Batch 842/2105 - Loss: 0.4134 - Accuracy: 0.8750
+Batch 1263/2105 - Loss: 0.2857 - Accuracy: 0.9375
+Batch 1684/2105 - Loss: 0.2842 - Accuracy: 0.9375
+Batch 2105/2105 - Loss: 0.2943 - Accuracy: 0.9524
+Epoch 12 - Train Loss: 0.3773 - Train Acc: 0.8888 - Val Loss: 0.2895 - Val Acc: 0.9129 - Time: 353.00s
+Epoch 13/20
+Batch 421/2105 - Loss: 0.3855 - Accuracy: 0.9062
+Batch 842/2105 - Loss: 0.3114 - Accuracy: 0.9375
+Batch 1263/2105 - Loss: 0.3298 - Accuracy: 0.9062
+Batch 1684/2105 - Loss: 0.3109 - Accuracy: 0.9688
+Batch 2105/2105 - Loss: 0.3541 - Accuracy: 0.8095
+Epoch 13 - Train Loss: 0.3708 - Train Acc: 0.8917 - Val Loss: 0.2940 - Val Acc: 0.9096 - Time: 352.13s
+Epoch 14/20
+Batch 421/2105 - Loss: 0.5311 - Accuracy: 0.7500
+Batch 842/2105 - Loss: 0.4632 - Accuracy: 0.7812
+Batch 1263/2105 - Loss: 0.3536 - Accuracy: 0.9062
+Batch 1684/2105 - Loss: 0.3841 - Accuracy: 0.8750
+Batch 2105/2105 - Loss: 0.4477 - Accuracy: 0.8571
+Epoch 14 - Train Loss: 0.3674 - Train Acc: 0.8915 - Val Loss: 0.2833 - Val Acc: 0.9141 - Time: 352.36s
+Epoch 15/20
+Batch 421/2105 - Loss: 0.2622 - Accuracy: 0.9688
+Batch 842/2105 - Loss: 0.3129 - Accuracy: 0.9375
+Batch 1263/2105 - Loss: 0.4910 - Accuracy: 0.7812
+Batch 1684/2105 - Loss: 0.3963 - Accuracy: 0.8438
+Batch 2105/2105 - Loss: 0.4370 - Accuracy: 0.8571
+Epoch 15 - Train Loss: 0.3624 - Train Acc: 0.8928 - Val Loss: 0.2866 - Val Acc: 0.9051 - Time: 352.93s
+Epoch 16/20
+Batch 421/2105 - Loss: 0.3260 - Accuracy: 0.9062
+Batch 842/2105 - Loss: 0.3244 - Accuracy: 0.9375
+Batch 1263/2105 - Loss: 0.3114 - Accuracy: 0.9375
+Batch 1684/2105 - Loss: 0.5270 - Accuracy: 0.7188
+Batch 2105/2105 - Loss: 0.3991 - Accuracy: 0.9048
+Epoch 16 - Train Loss: 0.3579 - Train Acc: 0.8949 - Val Loss: 0.2932 - Val Acc: 0.9096 - Time: 352.70s
+Epoch 17/20
+Batch 421/2105 - Loss: 0.2730 - Accuracy: 0.9688
+Batch 842/2105 - Loss: 0.3054 - Accuracy: 0.9375
+Batch 1263/2105 - Loss: 0.3899 - Accuracy: 0.8125
+Batch 1684/2105 - Loss: 0.3299 - Accuracy: 0.9062
+Batch 2105/2105 - Loss: 0.3497 - Accuracy: 0.9048
+Epoch 17 - Train Loss: 0.3552 - Train Acc: 0.8954 - Val Loss: 0.2915 - Val Acc: 0.9107 - Time: 352.47s
+Epoch 18/20
+Batch 421/2105 - Loss: 0.3751 - Accuracy: 0.8750
+Batch 842/2105 - Loss: 0.3747 - Accuracy: 0.9062
+Batch 1263/2105 - Loss: 0.3306 - Accuracy: 0.9062
+Batch 1684/2105 - Loss: 0.4661 - Accuracy: 0.8125
+Batch 2105/2105 - Loss: 0.3900 - Accuracy: 0.9048
+Epoch 18 - Train Loss: 0.3529 - Train Acc: 0.8954 - Val Loss: 0.2807 - Val Acc: 0.9096 - Time: 352.47s
+Epoch 19/20
+Batch 421/2105 - Loss: 0.4173 - Accuracy: 0.8750
+Batch 842/2105 - Loss: 0.3906 - Accuracy: 0.8438
+Batch 1263/2105 - Loss: 0.4207 - Accuracy: 0.8125
+Batch 1684/2105 - Loss: 0.2715 - Accuracy: 0.9688
+Batch 2105/2105 - Loss: 0.5237 - Accuracy: 0.8095
+Epoch 19 - Train Loss: 0.3486 - Train Acc: 0.8968 - Val Loss: 0.3030 - Val Acc: 0.9029 - Time: 352.88s
+Epoch 20/20
+Batch 421/2105 - Loss: 0.3080 - Accuracy: 0.9062
+Batch 842/2105 - Loss: 0.3039 - Accuracy: 0.8750
+Batch 1263/2105 - Loss: 0.3705 - Accuracy: 0.9062
+Batch 1684/2105 - Loss: 0.3484 - Accuracy: 0.9062
+Batch 2105/2105 - Loss: 0.3586 - Accuracy: 0.8571
+Epoch 20 - Train Loss: 0.3444 - Train Acc: 0.8995 - Val Loss: 0.3040 - Val Acc: 0.8996 - Time: 353.40s
+Average Time per Epoch: 353.25s
+Validation Loss: 0.3040, Validation Accuracy: 0.8996
