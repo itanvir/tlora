@@ -167,9 +167,9 @@ def prepare_tokenized_dataloaders_cola(raw_datasets, model_name, batch_size=32):
     return train_dataloader, val_dataloader
 
 
-def prepare_tokenized_dataloaders_wnli(raw_datasets, model_name, batch_size=32):
+def prepare_tokenized_dataloaders_qnli(raw_datasets, model_name, batch_size=32):
     """
-    Prepare tokenized dataloaders for the WNLI task.
+    Prepare tokenized dataloaders for the QNLI task.
     """
 
     # Initialize the tokenizer
@@ -177,8 +177,8 @@ def prepare_tokenized_dataloaders_wnli(raw_datasets, model_name, batch_size=32):
 
     def tokenize_function(example):
         return tokenizer(
-            example["sentence1"],
-            example["sentence2"],
+            example["question"],
+            example["sentence"],
             return_token_type_ids=True,
             truncation=True,
         )
@@ -186,7 +186,7 @@ def prepare_tokenized_dataloaders_wnli(raw_datasets, model_name, batch_size=32):
     # Tokenize the datasets
     tokenized_datasets = raw_datasets.map(tokenize_function, batched=True)
     tokenized_datasets = tokenized_datasets.remove_columns(
-        ["sentence1", "sentence2", "idx"]
+        ["question", "sentence", "idx"]
     )
     tokenized_datasets.set_format("torch")
 

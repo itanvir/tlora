@@ -12,6 +12,7 @@ from data import (
     prepare_tokenized_dataloaders_cola,
     prepare_tokenized_dataloaders_rte,
     prepare_tokenized_dataloaders_sst2,
+    prepare_tokenized_dataloaders_qnli,
 )
 from tlora import create_lora_model, train, validate
 
@@ -56,7 +57,7 @@ def reset_logger():
     sys.stdout = sys.__stdout__
 
 
-def run_experiment(data_name, model_name, lora_type, batch_size=32, rank=8, epochs=20):
+def run_experiment(data_name, model_name, lora_type, batch_size=32, rank=32, epochs=20):
     print(
         f"Running experiment with data: {data_name}, model: {model_name}, LoRA type: {lora_type}"
     )
@@ -70,10 +71,11 @@ def run_experiment(data_name, model_name, lora_type, batch_size=32, rank=8, epoc
         raw_datasets = load_dataset("glue", "rte")
     elif data_name == "glue_sst2":
         raw_datasets = load_dataset("glue", "sst2")
+    elif data_name == "glue_qnli":
+        raw_datasets = load_dataset("glue", "qnli")
     else:
         raise ValueError(
-            f"Dataset {
-                data_name} not recognized. Please provide a valid dataset."
+            f"Dataset {data_name} not recognized. Please provide a valid dataset."
         )
 
     # Prepare tokenized dataloaders
@@ -93,6 +95,10 @@ def run_experiment(data_name, model_name, lora_type, batch_size=32, rank=8, epoc
         train_dataloader, val_dataloader = prepare_tokenized_dataloaders_sst2(
             raw_datasets, model_name, batch_size=batch_size
         )
+    elif data_name == "glue_qnli":
+        train_dataloader, val_dataloader = prepare_tokenized_dataloaders_qnli(
+            raw_datasets, model_name, batch_size=batch_size
+        )
 
     # Base model
     config = AutoConfig.from_pretrained(model_name)
@@ -109,15 +115,11 @@ def run_experiment(data_name, model_name, lora_type, batch_size=32, rank=8, epoc
     print(summary(lora_model))
 
     # Training setup
-    optimizer = torch.optim.Adam(params=lora_model.parameters(), lr=1e-5)
-    epochs = 20
+    optimizer = torch.optim.AdamW(params=lora_model.parameters(), lr=1e-03)
+    epochs = 30
     trained_model, history = train(
         lora_model, train_dataloader, val_dataloader, epochs, optimizer
     )
-
-    # Validate and report
-    avg_loss, avg_acc = validate(trained_model, val_dataloader)
-    print(f"Validation Loss: {avg_loss:.4f}, Validation Accuracy: {avg_acc:.4f}")
 
     # Save history
     short_model_name = model_name.split("/")[-1]
@@ -127,13 +129,25 @@ def run_experiment(data_name, model_name, lora_type, batch_size=32, rank=8, epoc
     with open(loss_curve_file, "w") as f:
         json.dump(history, f, indent=4)
 
+    # Save model
+    if short_model_name == "roberta-large-mnli":
+        model_path = os.path.join(
+            "models", f"model_{data_name}_{short_model_name}_{lora_type}.pt"
+        )
+        torch.save(trained_model, model_path)
+
     return None
 
 
 # Define the experiment parameters
-data_names = ["glue_mrpc", "glue_rte", "glue_cola", "glue_sst2"]
-model_names = ["facebook/opt-125m", "FacebookAI/roberta-base"]
-lora_types = ["tlora", "lora"]
+# data_names = ["glue_mrpc", "glue_rte", "glue_cola", "glue_sst2", "glue_qnli"]
+# model_names = ["FacebookAI/roberta-large-mnli", "FacebookAI/roberta-base", "facebook/opt-125m", "microsoft/deberta-base"]
+# lora_types = ["tlora", "lora"]
+
+data_names = ["glue_mrpc", "glue_rte", "glue_cola", "glue_sst2", "glue_qnli"]
+data_names = ["glue_qnli"]
+model_names = ["FacebookAI/roberta-large-mnli"]
+lora_types = ["tlora"]
 
 # Loop through all combinations of parameters and run experiments
 for data_name, model_name, lora_type in product(data_names, model_names, lora_types):
