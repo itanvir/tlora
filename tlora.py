@@ -142,16 +142,13 @@ def create_lora_model(model, rank=16, lora_type="lora"):
             lora = LoRALayer(
                 weight=module_list[-1].weight,
                 bias=module_list[-1].bias,
+                rank=rank,
             ).to(device)
         elif lora_type == "tlora":
             lora = TLoRALayer(
                 weight=module_list[-1].weight,
                 bias=module_list[-1].bias,
-            ).to(device)
-        elif lora_type == "tlora-light":
-            lora = TLoRALayer(
-                weight=module_list[-1].weight,
-                bias=module_list[-1].bias,
+                rank=rank,
             ).to(device)
         # Replace with the LoRA layer
         module_list[-2].__setattr__(name_struct[-1], lora)
