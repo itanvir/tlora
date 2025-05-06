@@ -2,6 +2,8 @@
 
 This repository implements **TLoRA**, a novel approach for parameter-efficient fine-tuning of large language models using a tri-matrix low-rank adaptation strategy. Our paper details the method and experimental results, and this code repository is linked in the paper.
 
+Paper: https://arxiv.org/abs/2504.18735 
+
 ## Overview
 
 TLoRA aims to significantly reduce the number of trainable parameters while retaining high model performance. The repository includes:
@@ -68,7 +70,7 @@ If you use this work in your research, please cite our paper:
 @inproceedings{tlorapaper,
   title={TLoRA: Tri-Matrix Low-Rank Adaptation for Large Language Models},
   author={Tanvir Islam},
-  booktitle={https://arxiv.org/pdf/xxxx},
+  booktitle={https://arxiv.org/abs/2504.18735},
   year={2025},
 }
 ```
