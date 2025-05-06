@@ -1,0 +1,9 @@
+datasets==3.0.2
+matplotlib==3.10.1
+numpy==2.2.5
+scikit_learn==1.6.1
+scipy==1.15.2
+seaborn==0.13.2
+torch==2.5.1
+torchinfo==1.8.0
+transformers==4.46.1
